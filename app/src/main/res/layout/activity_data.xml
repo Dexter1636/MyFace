@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.DataActivity">
+    <data>
+        <variable name="viewmodel" type="org.hhutzb.myface.viewmodels.DataViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_anger_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="愤怒:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_disgust_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="厌恶:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_anger_key" />
+
+        <TextView
+            android:id="@+id/tv_fear_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="恐惧:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_disgust_key" />
+
+        <TextView
+            android:id="@+id/tv_happiness_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="高兴:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fear_key" />
+
+        <TextView
+            android:id="@+id/tv_neutral_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="平静"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_happiness_key" />
+
+        <TextView
+            android:id="@+id/tv_sadness_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="伤心:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_neutral_key" />
+
+        <TextView
+            android:id="@+id/tv_surprise_key"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="惊讶:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sadness_key" />
+
+        <TextView
+            android:id="@+id/tv_anger_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.anger_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_anger_key"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_disgust_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.disgust_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_disgust_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_anger_value" />
+
+        <TextView
+            android:id="@+id/tv_fear_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.fear_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_fear_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_disgust_value" />
+
+        <TextView
+            android:id="@+id/tv_happiness_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.happiness_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_happiness_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fear_value" />
+
+        <TextView
+            android:id="@+id/tv_neutral_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.neutral_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_neutral_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_happiness_value" />
+
+        <TextView
+            android:id="@+id/tv_sadness_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.sadness_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_sadness_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_neutral_value" />
+
+        <TextView
+            android:id="@+id/tv_surprise_value"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.emotionLiveData.surprise_value)}"
+            app:layout_constraintStart_toEndOf="@+id/tv_surprise_key"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sadness_value" />
+
+        <SurfaceView
+            android:id="@+id/sv_camera"
+            android:layout_width="180dp"
+            android:layout_height="240dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_show"
+            android:layout_width="180dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sv_camera"
+            app:srcCompat="@color/qmui_config_color_black" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
