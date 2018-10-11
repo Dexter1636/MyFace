@@ -51,7 +51,7 @@ public class EmotionData {
         surprise_value = emotionBean.getSurprise();
     }
 
-    private void setVauleToZero() {
+    private void setValueToZero() {
         anger_value = 0.0;
         disgust_value = 0.0;
         fear_value = 0.0;
@@ -70,7 +70,7 @@ public class EmotionData {
         try {
             FaceDetectReceived faceDetectReceived = new Gson().fromJson(response, FaceDetectReceived.class);
             if (faceDetectReceived.getFaces().size() == 0) {
-                setVauleToZero();
+                setValueToZero();
                 errorMessage = "未检测到人脸";
             } else {
                 errorMessage = "";
