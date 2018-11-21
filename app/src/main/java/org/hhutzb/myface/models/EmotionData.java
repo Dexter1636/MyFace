@@ -14,7 +14,9 @@ import org.hhutzb.myface.utilities.JsonUtils;
 
 import java.util.Objects;
 
-
+/**
+ * 情绪数据结构类
+ */
 public class EmotionData {
     private static final String TAG = "EmotionData";
 
@@ -26,7 +28,6 @@ public class EmotionData {
     public double sadness_value;
     public double surprise_value;
     public String errorMessage = "";
-
 
     public EmotionData(double anger_value, double disgust_value, double fear_value, double happiness_value, double neutral_value, double sadness_value, double surprise_value) {
         this.anger_value = anger_value;
@@ -51,6 +52,9 @@ public class EmotionData {
         surprise_value = emotionBean.getSurprise();
     }
 
+    /**
+     * 将情绪数据值全部设为0
+     */
     private void setValueToZero() {
         anger_value = 0.0;
         disgust_value = 0.0;
@@ -63,7 +67,9 @@ public class EmotionData {
 
 
 
-
+    /**
+     * 发送网络请求获取情绪数据
+     */
     public void getData(String image_base64 , Context context) {
         String response = JsonUtils.postJson(image_base64, APIUtils.FACE_DETECT, context);
         Log.i(TAG, "received:" + response);

@@ -2,12 +2,16 @@ package org.hhutzb.myface.models.bean;
 
 import java.util.List;
 
+
+/**
+ * 网络请求返回POJO类
+ */
 public class FaceDetectReceived {
 
     /**
-     * image_id : wAP/4Cy7GfFhIeMjN8EIOw==
-     * request_id : 1538535740,911b40b0-1022-412e-ad37-088a1b8cbaf2
-     * time_used : 619
+     * image_id :
+     * request_id :
+     * time_used :
      * faces : [{"attributes":{"emotion":{"sadness":0.005,"neutral":97.786,"disgust":0.051,"anger":0.034,"surprise":2.094,"fear":0.005,"happiness":0.025}},"face_rectangle":{"width":388,"top":653,"left":303,"height":388},"face_token":"3f64c5e6d46f606d3194076d9601d205"}]
      */
 
@@ -52,7 +56,7 @@ public class FaceDetectReceived {
         /**
          * attributes : {"emotion":{"sadness":0.005,"neutral":97.786,"disgust":0.051,"anger":0.034,"surprise":2.094,"fear":0.005,"happiness":0.025}}
          * face_rectangle : {"width":388,"top":653,"left":303,"height":388}
-         * face_token : 3f64c5e6d46f606d3194076d9601d205
+         * face_token :
          */
 
         private AttributesBean attributes;
