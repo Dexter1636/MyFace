@@ -1,6 +1,7 @@
 package org.hhutzb.myface.ui;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -29,6 +30,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -41,6 +43,7 @@ import org.hhutzb.myface.viewmodels.DataViewModel;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+
 
 public class DataActivity extends AppCompatActivity {
     private static final String TAG = "DataActivity";
@@ -55,7 +58,6 @@ public class DataActivity extends AppCompatActivity {
         ORIENTATIONS.append(Surface.ROTATION_270, 0);
     }
 
-    //6.0开始
     private CameraManager manager; //摄像头管理器
     private Handler childHandler, mainHandler;
     private CameraDevice mCamera;
@@ -64,14 +66,12 @@ public class DataActivity extends AppCompatActivity {
     private ImageReader mImageReader;
     // 创建拍照需要的CaptureRequest.Builder
     private CaptureRequest.Builder captureRequestBuilder;
-    //6.0结束
 
     private DataViewModel viewModel;
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
     private ImageView iv_show;
     private String mCameraID = "1"; //摄像头id 0为后 1为前
-
 
 
     /**
@@ -101,6 +101,7 @@ public class DataActivity extends AppCompatActivity {
         @Override
         public void onError(CameraDevice camera, int error) {
             //发生错误
+            ToastUtils.makeShortText("摄像头出错", DataActivity.this);
         }
     };
 
@@ -150,6 +151,7 @@ public class DataActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         activityDataBinding.setViewmodel(viewModel);
 
+        // 权限检查
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(DataActivity.this, new String[] {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_REQUEST_CODE);
         }
@@ -238,6 +240,7 @@ public class DataActivity extends AppCompatActivity {
         });
 
     }
+
 
 
     /**
