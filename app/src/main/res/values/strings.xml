@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyFace</string>
+    <string name="app_welcome">开始</string>
 </resources>
