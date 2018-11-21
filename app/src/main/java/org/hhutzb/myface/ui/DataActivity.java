@@ -1,7 +1,6 @@
 package org.hhutzb.myface.ui;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -30,7 +29,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -152,7 +150,7 @@ public class DataActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         activityDataBinding.setViewmodel(viewModel);
 
-        // 沉浸式状态栏
+        // 窗口配置
         WindowUtils.setStatusBarTranslucent(this);
 
         // 权限检查

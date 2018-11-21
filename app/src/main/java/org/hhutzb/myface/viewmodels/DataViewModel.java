@@ -25,8 +25,11 @@ public class DataViewModel extends AndroidViewModel {
     }
 
 
-
-
+    /**
+     * ImageByteArray输入命令
+     *
+     * @param bitmapBytes
+     */
     public void setImageByteArray(byte[] bitmapBytes) {
         String image_base64 = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
         new Thread() {
