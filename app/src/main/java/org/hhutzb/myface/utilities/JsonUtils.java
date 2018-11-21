@@ -19,7 +19,6 @@ import okhttp3.Response;
 /**
  * Created by Dexter on 2017/12/18.
  */
-
 public class JsonUtils {
 
     public static final String TAG = "JsonUtils";

@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import org.hhutzb.myface.R;
 import org.hhutzb.myface.databinding.ActivityDataBinding;
 import org.hhutzb.myface.utilities.ToastUtils;
+import org.hhutzb.myface.utilities.WindowUtils;
 import org.hhutzb.myface.viewmodels.DataViewModel;
 
 import java.nio.ByteBuffer;
@@ -49,8 +50,8 @@ public class DataActivity extends AppCompatActivity {
     private static final String TAG = "DataActivity";
     private static final int MY_CAMERA_REQUEST_CODE = 100;
 
+    // 为了使照片竖直显示
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-    ///为了使照片竖直显示
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 270);
         ORIENTATIONS.append(Surface.ROTATION_90, 180);
@@ -58,20 +59,19 @@ public class DataActivity extends AppCompatActivity {
         ORIENTATIONS.append(Surface.ROTATION_270, 0);
     }
 
-    private CameraManager manager; //摄像头管理器
+    private CameraManager manager; // 摄像头管理器
     private Handler childHandler, mainHandler;
     private CameraDevice mCamera;
     private CaptureRequest.Builder mPreviewBuilder;
     private CameraCaptureSession mSession;
     private ImageReader mImageReader;
-    // 创建拍照需要的CaptureRequest.Builder
-    private CaptureRequest.Builder captureRequestBuilder;
+    private CaptureRequest.Builder captureRequestBuilder; // 创建拍照需要的CaptureRequest.Builder
 
     private DataViewModel viewModel;
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
     private ImageView iv_show;
-    private String mCameraID = "1"; //摄像头id 0为后 1为前
+    private String mCameraID = "1"; // 摄像头id 0为后 1为前
 
 
     /**
@@ -79,7 +79,8 @@ public class DataActivity extends AppCompatActivity {
      */
     private CameraDevice.StateCallback mCameraDeviceStateCallback = new CameraDevice.StateCallback() {
         @Override
-        public void onOpened(CameraDevice camera) {//打开摄像头
+        public void onOpened(CameraDevice camera) {
+            // 打开摄像头
             try {
                 //开启预览
                 mCamera = camera;
@@ -117,13 +118,13 @@ public class DataActivity extends AppCompatActivity {
                     captureRequestBuilder = mCamera.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
                     // 将imageReader的surface作为CaptureRequest.Builder的目标
                     captureRequestBuilder.addTarget(mImageReader.getSurface());
-                    //关闭自动对焦
+                    // 关闭自动对焦
                     captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_OFF);
                     captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_OFF);
-//                    //设置拍摄图像时相机设备是否使用光学防抖（OIS）。
+//                    // 设置拍摄图像时相机设备是否使用光学防抖（OIS）。
 //                    captureRequestBuilder.set(CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE, CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE_ON);
 //                    captureRequestBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, valueISO);
-                    //曝光补偿//
+                    // 曝光补偿
                     captureRequestBuilder.set(CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION, 0);
                 } catch (CameraAccessException e) {
                     e.printStackTrace();
@@ -151,6 +152,9 @@ public class DataActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         activityDataBinding.setViewmodel(viewModel);
 
+        // 沉浸式状态栏
+        WindowUtils.setStatusBarTranslucent(this);
+
         // 权限检查
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(DataActivity.this, new String[] {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_REQUEST_CODE);
@@ -164,7 +168,7 @@ public class DataActivity extends AppCompatActivity {
         mSurfaceHolder.setKeepScreenOn(true);
 
 
-        //很多过程都变成了异步的了，所以这里需要一个子线程的looper
+        // 很多过程都变成了异步的了，所以这里需要一个子线程的looper
         HandlerThread handlerThread = new HandlerThread("Camera2");
         handlerThread.start();
         childHandler = new Handler(handlerThread.getLooper());
@@ -174,13 +178,13 @@ public class DataActivity extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 try {
-                    //需要相机权限
+                    // 需要相机权限
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
-                    //获取可用相机设备列表
+                    // 获取可用相机设备列表
                     String[] CameraIdList = manager.getCameraIdList();
-                    //打开相机
+                    // 打开相机
                     manager.openCamera(mCameraID, mCameraDeviceStateCallback, mainHandler);
                     CameraCharacteristics characteristics = manager.getCameraCharacteristics("1");
                     StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
@@ -206,21 +210,23 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        //设置照片的大小
+        // 设置照片的大小
         mImageReader = ImageReader.newInstance(720, 960, ImageFormat.JPEG, 2);
         mImageReader.setOnImageAvailableListener(imageReader -> {
             // 拿到拍照照片数据
             Image image = imageReader.acquireNextImage();
             ByteBuffer buffer = image.getPlanes()[0].getBuffer();
             byte[] bytes = new byte[buffer.remaining()];
-            buffer.get(bytes);//由缓冲区存入字节数组
+            // 由缓冲区存入字节数组
+            buffer.get(bytes);
             image.close();
             final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             if (bitmap != null) {
                 iv_show.setImageBitmap(bitmap);
             }
             viewModel.setImageByteArray(bytes);
-            //saveBitmap(bytes);//保存照片的处理
+//            // 保存照片
+//            saveBitmap(bytes);
         }, mainHandler);
 
 
@@ -244,7 +250,7 @@ public class DataActivity extends AppCompatActivity {
 
 
     /**
-     * 开始预览，主要是camera.createCaptureSession这段代码很重要，创建会话
+     * 开始预览，camera.createCaptureSession创建会话
      */
     private void startPreview(final CameraDevice camera) throws CameraAccessException {
         try {
@@ -297,15 +303,14 @@ public class DataActivity extends AppCompatActivity {
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             // 根据设备方向计算设置照片的方向
             captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            //拍照
+            // 拍照
             try {
                 CaptureRequest cr = captureRequestBuilder.build();
-                mSession.capture(cr, null, null);//单拍API，也可以调连拍的哦
+                mSession.capture(cr, null, null); // 单拍API，也可以调连拍的哦
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }
