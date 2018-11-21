@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -34,6 +35,8 @@ import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import org.hhutzb.myface.R;
@@ -151,6 +154,10 @@ public class DataActivity extends AppCompatActivity {
         ActivityDataBinding activityDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_data);
         viewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         activityDataBinding.setViewmodel(viewModel);
+
+
+        ImageButton imgbtn = findViewById(R.id.imgbtn_back);
+        imgbtn.setOnClickListener(v -> onBackPressed());
 
         // 沉浸式状态栏
         WindowUtils.setStatusBarTranslucent(this);
