@@ -164,6 +164,12 @@ public class DataActivity extends AppCompatActivity {
         ImageButton imgbtn = findViewById(R.id.imgbtn_back);
         imgbtn.setOnClickListener(v -> onBackPressed());
 
+        ImageButton imgbtntips = findViewById(R.id.imgbtn_tips);
+        imgbtntips.setOnClickListener(v -> {
+            Intent intent = new Intent(DataActivity.this, TipsActivity.class);
+            startActivity(intent);
+        });
+
         iv_show = findViewById(R.id.iv_show);
         mSurfaceView = findViewById(R.id.sv_camera);
         mSurfaceView.setOnClickListener(view -> takePicture());

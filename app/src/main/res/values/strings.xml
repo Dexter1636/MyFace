@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyFace</string>
     <string name="app_welcome">开始</string>
+    <string name="app_tips1">点击此处\n拍照</string>
+    <string name="app_tips2">拍照结果\n在此显示</string>
 </resources>
