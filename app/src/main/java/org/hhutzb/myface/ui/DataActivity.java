@@ -3,6 +3,7 @@ package org.hhutzb.myface.ui;
 import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -32,6 +33,8 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import org.hhutzb.myface.R;
@@ -157,6 +160,9 @@ public class DataActivity extends AppCompatActivity {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(DataActivity.this, new String[] {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_CAMERA_REQUEST_CODE);
         }
+
+        ImageButton imgbtn = findViewById(R.id.imgbtn_back);
+        imgbtn.setOnClickListener(v -> onBackPressed());
 
         iv_show = findViewById(R.id.iv_show);
         mSurfaceView = findViewById(R.id.sv_camera);

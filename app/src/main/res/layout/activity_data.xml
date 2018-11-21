@@ -12,21 +12,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/imgbtn_back"
+            android:layout_width="61dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/background_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_grey_800_24dp" />
+
         <TextView
             android:id="@+id/tv_anger_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="愤怒:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imgbtn_back" />
 
         <TextView
             android:id="@+id/tv_disgust_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="厌恶:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_anger_key" />
@@ -35,7 +46,7 @@
             android:id="@+id/tv_fear_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="恐惧:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_disgust_key" />
@@ -44,7 +55,7 @@
             android:id="@+id/tv_happiness_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="高兴:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_fear_key" />
@@ -53,7 +64,7 @@
             android:id="@+id/tv_neutral_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="平静"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_happiness_key" />
@@ -62,7 +73,7 @@
             android:id="@+id/tv_sadness_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="伤心:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_neutral_key" />
@@ -71,7 +82,7 @@
             android:id="@+id/tv_surprise_key"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:text="惊讶:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sadness_key" />
@@ -83,7 +94,7 @@
             android:layout_marginTop="8dp"
             android:text="@{String.valueOf(viewmodel.emotionLiveData.anger_value)}"
             app:layout_constraintStart_toEndOf="@+id/tv_anger_key"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imgbtn_back" />
 
         <TextView
             android:id="@+id/tv_disgust_value"
@@ -139,8 +150,9 @@
             android:layout_height="240dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imgbtn_back" />
 
         <ImageView
             android:id="@+id/iv_show"
@@ -150,5 +162,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sv_camera"
             app:srcCompat="@color/qmui_config_color_black" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="31dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_info" />
     </android.support.constraint.ConstraintLayout>
 </layout>
