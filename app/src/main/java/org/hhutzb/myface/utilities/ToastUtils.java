@@ -4,60 +4,85 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
+
+/**
+ * Toast工具类
+ */
 public class ToastUtils {
 
-    private static Toast shortToast = null;
+    private static Toast toast = null;
 
+    /**
+     * Make a long toast
+     *
+     * @param msg
+     * @param context
+     */
     public static void makeShortText(String msg, Context context) {
         if (context == null) {
             return;
         }
 
-        if (shortToast == null) {
-            shortToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        if (toast == null) {
+            toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         } else {
-            shortToast.setText(msg);
+            toast.setText(msg);
         }
-        shortToast.show();
+        toast.show();
     }
 
-
-    private static Toast longToast = null;
-
+    /**
+     * Make a short toast
+     *
+     * @param msg
+     * @param context
+     */
     public static void makeLongText(String msg, Context context) {
         if (context == null) {
             return;
         }
 
-        if (longToast == null) {
-            longToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+        if (toast == null) {
+            toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
         } else {
-            longToast.setText(msg);
+            toast.setText(msg);
         }
-        longToast.show();
+        toast.show();
     }
 
 
 
-    public static void showLong(Context context,String msg){
+    public static void showLong(Context context, String msg){
         makeLongText(msg, context);
     }
 
-    public static void showLong(Context context,int id){
-        makeLongText(context.getResources().getString(id), context);
-    }
-
-    public static void showShort(Context context,String msg){
+    public static void showShort(Context context, String msg){
         makeShortText(msg, context);
     }
 
-    public static void showShort(Context context,int id){
+    /**
+     * Make a long toast by resource id
+     *
+     * @param context
+     * @param id
+     */
+    public static void showLong(Context context, int id){
+        makeLongText(context.getResources().getString(id), context);
+    }
+
+    /**
+     * Make a short toast by resource id
+     *
+     * @param context
+     * @param id
+     */
+    public static void showShort(Context context, int id){
         makeShortText(context.getResources().getString(id), context);
     }
 
 
     public static void showCenterToast(Context context, String msg) {
-        Toast toast = Toast.makeText(context, msg,  Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

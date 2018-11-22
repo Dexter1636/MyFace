@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
-  * 全局统一使用的OkHttpClient工具，okhttp版本：okhttp3
+  * 全局统一使用的OkHttpClient工具类，okhttp版本：okhttp3
   */
 public class MyOkHttpUtils {
     public static final long DEFAULT_READ_TIMEOUT_MILLIS = 15 * 1000;
